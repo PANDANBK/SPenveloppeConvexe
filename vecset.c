@@ -8,6 +8,7 @@ int main()
 
 void vecset_create(struct vecset *self)
 {
+    assert(self != NULL);
     self->data = calloc(sizeof(struct vec), 6);
     self->size = 0;
     self->capacity = 6;
@@ -15,6 +16,7 @@ void vecset_create(struct vecset *self)
 
 void vecset_destroy(struct vecset *self)
 {
+    assert(self != NULL);
     free(self->data);
     self->data = NULL;
 }
