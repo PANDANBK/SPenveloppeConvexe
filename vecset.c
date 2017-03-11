@@ -41,12 +41,46 @@ void vecset_add(struct vecset *self, struct vec p)
 
 const struct vec *vecset_max(const struct vecset *self, comp_func_t func, const void *ctx)
 {
-  return NULL;
+  assert(self != NULL);
+
+  if(self->size == 0)
+    return NULL;
+
+  if(self->size == 1)
+    return self->data;
+
+  size_t max = 0;
+  for(size_t i = 1; i < self->size; i++)
+  {
+    if( func(&self->data[max], &self->data[i], ctx) < 0 )
+    {
+      max = i;
+    }
+  }
+
+  return &self->data[max];
 }
 
 const struct vec *vecset_min(const struct vecset *self, comp_func_t func, const void *ctx)
 {
-  return NULL;
+  assert(self != NULL);
+
+  if(self->size == 0)
+    return NULL;
+
+  if(self->size == 1)
+    return self->data;
+
+  size_t min = 0;
+  for(size_t i = 1; i < self->size; i++)
+  {
+    if( func(&self->data[min], &self->data[i], ctx) > 0 )
+    {
+      min = i;
+    }
+  }
+
+  return &self->data[min];
 }
 
 void vector_set_sort(struct vecset *self, comp_func_t func, const void *ctx)
