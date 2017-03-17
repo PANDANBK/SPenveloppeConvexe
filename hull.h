@@ -7,6 +7,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+#define BUFSIZE 1024
+
 /**
  * Vecteur (représente aussi les points)
  */
@@ -106,7 +108,7 @@ const struct vec *vecset_min(const struct vecset *self, comp_func_t func, const 
  * @param   comp_func_t         func    Fonction de comparaison
  * @param   const void          *ctx
  */
-void vector_set_sort(struct vecset *self, comp_func_t func, const void *ctx);
+void vecset_sort(struct vecset *self, comp_func_t func, const void *ctx);
 
 /**
  * Emplie un élément

@@ -14,7 +14,7 @@ double cross(const struct vec *p1, const struct vec *p2, const struct vec *p3)
 
 bool is_left_turn(const struct vec *p1, const struct vec *p2, const struct vec *p3)
 {
-    if(cross(p1, p2, p3) > 0)
+    if(cross(p1, p2, p3) <= 0)
     {
         return true;
     }
