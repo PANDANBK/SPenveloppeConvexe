@@ -16,12 +16,7 @@ int compa_angle(const struct vec *p1, const struct vec *p2, const void *ctx)
 
   const struct vec *p3 = ctx;
 
-  //printf("Angle entre : (%f, %f) ; (%f, %f) ; (%f, %f)\n", p1->x, p1->y, p2->x, p2->y, p3->x, p3->y);
-
-
-  /*double a1 = fabs(atan2(p1->x - p3->x, p1->y - p3->y));
-  double a2 = fabs(atan2(p2->x - p3->x, p2->y - p3->y));*/
-
+  // Possibilité d'utiliser atan2
   double a1;
   if(p1->y != p3->y)
   {
@@ -48,20 +43,27 @@ int compa_angle(const struct vec *p1, const struct vec *p2, const void *ctx)
 
   if(a1 == a2)
   {
-    //printf("= : %d\n", (int)((p1->x - p2->x)*1000));
     return (int)((p1->x - p2->x)*1000);
   }
 
-  //printf("Res : %d\n", (int)((a1 - a2)*1000));
   return (int)((a1 - a2)*1000);
-
-  //printf("1 : %f ; 2 : %f\n", a1, a2);
-
-  // return a1 == a2 ? p1->x - p2->x : a1 - a2;
 }
 
 void graham_scan(const struct vecset *in, struct vecset *out)
 {
+  assert(in != NULL);
+
+  vecset_create(out);
+  // Solution triviale
+  if(in->size <= 2)
+  {
+    for(size_t i = 0; i < in->size; i++)
+    {
+      vecset_add(out, in->data[i]);
+    }
+    return;
+  }
+
   const struct vec *b = vecset_min(in, compa_lowest, NULL);
 
   // Tri de in -> Création d'un nouvel ensemble qu'on va pouvoir trier
@@ -73,32 +75,11 @@ void graham_scan(const struct vecset *in, struct vecset *out)
   }
   vecset_sort(&s, compa_angle, b);
 
-  /*printf("--- S TRIÉ ---\n");
-  for(size_t k = 0; k < s.size; k++)
-  {
-    printf("out %zu : %f %f\n", k, s.data[k].x, s.data[k].y);
-  }*/
-
   const struct vec *f = &s.data[1];
 
-  vecset_create(out);
-  /*printf("--- START ---\n");
-  for(size_t k = 0; k < out->size; k++)
-  {
-    printf("out %zu : %f %f\n", k, out->data[k].x, out->data[k].y);
-  }*/
   vecset_push(out, *b);
-  /*printf("--- PUSH ---\n");
-  for(size_t k = 0; k < out->size; k++)
-  {
-    printf("out %zu : %f %f\n", k, out->data[k].x, out->data[k].y);
-  }*/
+
   vecset_push(out, *f);
-  /*printf("--- PUSH ---\n");
-  for(size_t k = 0; k < out->size; k++)
-  {
-    printf("out %zu : %f %f\n", k, out->data[k].x, out->data[k].y);
-  }*/
 
   for(size_t i = 0; i < s.size; i++)
   {
@@ -106,24 +87,14 @@ void graham_scan(const struct vecset *in, struct vecset *out)
     {
       continue;
     }
-    //const struct vec *top = vecset_top(out);
-    //const struct vec *second = vecset_second(out);
+
+    // second et top dans la condition afin d'être mis à jour à chaque boucle
     while(out->size >= 2 && is_left_turn(vecset_second(out), vecset_top(out), &s.data[i]))
     {
-      //printf("Pt (%f, %f)\n", s.data[i].x, s.data[i].y);
       vecset_pop(out);
-      /*printf("--- POP ---\n");
-      for(size_t k = 0; k < out->size; k++)
-      {
-        printf("out %zu : %f %f\n", k, out->data[k].x, out->data[k].y);
-      }*/
     }
     vecset_push(out, s.data[i]);
-    /*printf("--- PUSH ---\n");
-    for(size_t k = 0; k < out->size; k++)
-    {
-      printf("out %zu : %f %f\n", k, out->data[k].x, out->data[k].y);
-    }*/
   }
+  // Libération de la mémoire
   vecset_destroy(&s);
 }

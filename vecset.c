@@ -3,6 +3,7 @@
 void vecset_create(struct vecset *self)
 {
     assert(self != NULL);
+
     self->data = calloc(sizeof(struct vec), 6);
     self->size = 0;
     self->capacity = 6;

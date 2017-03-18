@@ -7,15 +7,15 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define BUFSIZE 1024
+#define BUFSIZE 1024 /*!< Taille de lecture (pour le pilote) */
 
 /**
  * Vecteur (représente aussi les points)
  */
 struct vec
 {
-  double x;
-  double y;
+  double x; /*!< Abscisse */
+  double y; /*!< Ordonnée */
 };
 
 /**
@@ -52,9 +52,9 @@ bool is_left_turn(const struct vec *p1, const struct vec *p2, const struct vec *
  */
 struct vecset
 {
-  struct vec *data;
-  size_t size;
-  size_t capacity;
+  struct vec *data; /*!< Tableau des données */
+  size_t size;      /*!< Taille du tableau */
+  size_t capacity;  /*!< Capacité maximale du tableau */
 };
 
 /**
@@ -79,6 +79,9 @@ void vecset_destroy(struct vecset *self);
  */
 void vecset_add(struct vecset *self, struct vec p);
 
+/**
+ * Type des fonctions de comparaison, avec possibilité d'utiliser un troisième paramètre comme contexte
+ */
 typedef int (*comp_func_t)(const struct vec *p1, const struct vec *p2, const void *ctx);
 
 /**
