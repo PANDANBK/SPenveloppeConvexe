@@ -5,7 +5,7 @@ size_t aleat(size_t min, size_t max)
   return (rand() % (max - min + 1)) + min;
 }
 
-int compa_most_left(struct vec *p1, const struct vec *p2, const void *ctx)
+int compa_most_left(const struct vec *p1, const struct vec *p2, const void *ctx)
 {
   assert(p1 != NULL);
   assert(p2 != NULL);

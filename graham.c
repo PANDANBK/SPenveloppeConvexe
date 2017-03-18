@@ -1,6 +1,6 @@
 #include "graham.h"
 
-int compa_lowest(struct vec *p1, const struct vec *p2, const void *ctx)
+int compa_lowest(const struct vec *p1, const struct vec *p2, const void *ctx)
 {
   assert(p1 != NULL);
   assert(p2 != NULL);
@@ -8,7 +8,7 @@ int compa_lowest(struct vec *p1, const struct vec *p2, const void *ctx)
   return p1->y == p2->y ? p1->x - p2->x : p1->y - p2->y;
 }
 
-int compa_angle(struct vec *p1, const struct vec *p2, const void *ctx)
+int compa_angle(const struct vec *p1, const struct vec *p2, const void *ctx)
 {
   assert(p1 != NULL);
   assert(p2 != NULL);

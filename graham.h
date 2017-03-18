@@ -25,7 +25,7 @@ void graham_scan(const struct vecset *in, struct vecset *out);
  * @param const void *ctx   Doit être NULL (ignoré dans la fonction)
  * @return int              Entier de retour
  */
-int compa_lowest(struct vec *p1, const struct vec *p2, const void *ctx);
+int compa_lowest(const struct vec *p1, const struct vec *p2, const void *ctx);
 
 /**
  * Compare deux points selon leur angle avec l'axe des abscisses relativement à B
@@ -38,6 +38,6 @@ int compa_lowest(struct vec *p1, const struct vec *p2, const void *ctx);
  * @param const void *ctx   Troisème point
  * @return int              Entier de retour
  */
-int compa_angle(struct vec *p1, const struct vec *p2, const void *ctx);
+int compa_angle(const struct vec *p1, const struct vec *p2, const void *ctx);
 
 #endif

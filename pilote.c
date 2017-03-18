@@ -1,6 +1,7 @@
 #include "hull.h"
 #include "jarvis.h"
 #include "graham.h"
+#include "quickhull.h"
 
 int main()
 {
@@ -29,8 +30,9 @@ int main()
   }
 
   struct vecset sortie;
-  jarvis_march(&ensemble, &sortie);
+  // jarvis_march(&ensemble, &sortie);
   // graham_scan(&ensemble, &sortie);
+  quickhull(&ensemble, &sortie);
 
   printf("%zu\n", sortie.size);
   for(size_t i = 0; i < sortie.size; i++)

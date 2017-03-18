@@ -39,6 +39,6 @@ struct vec *vecset_random(const struct vecset *self);
  * @param const void *ctx   Doit être NULL (ignoré dans la fonction)
  * @return int              Entier de retour
  */
-int compa_most_left(struct vec *p1, const struct vec *p2, const void *ctx);
+int compa_most_left(const struct vec *p1, const struct vec *p2, const void *ctx);
 
 #endif

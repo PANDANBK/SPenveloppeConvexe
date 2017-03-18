@@ -79,7 +79,7 @@ void vecset_destroy(struct vecset *self);
  */
 void vecset_add(struct vecset *self, struct vec p);
 
-typedef int (*comp_func_t)(struct vec *p1, const struct vec *p2, const void *ctx);
+typedef int (*comp_func_t)(const struct vec *p1, const struct vec *p2, const void *ctx);
 
 /**
  * Renvoie le maximum d'un ensemble de points suivant une fonction de comparaison donnée
