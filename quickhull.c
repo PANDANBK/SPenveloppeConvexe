@@ -41,8 +41,8 @@ void quickhull(const struct vecset *in, struct vecset *out)
     if(in->data[i].x == b->x && in->data[i].y == b->y)
       continue;
 
-    // Si le point I est à gauche de (ab)
-    if(is_left_turn(a, b, &in->data[i]))
+    // Si le point I est à droite de (ab)
+    if(is_right_turn(a, b, &in->data[i]))
     {
       vecset_add(&s1, in->data[i]);
     }
@@ -135,12 +135,12 @@ void findhull(const struct vecset *s, struct vecset *out, const struct vec *x, c
       continue;
 
     // Si le point I est à gauche de la droite (xm) - strictement
-    if( !is_left_turn(&m, x, &s->data[i]) )
+    if( !is_right_turn(&m, x, &s->data[i]) )
     {
       vecset_add(&s1, s->data[i]);
     }
     // Sinon si le point I est à gauche de la droite (my) - strictement
-    else if( !is_left_turn(y, &m, &s->data[i]) )
+    else if( !is_right_turn(y, &m, &s->data[i]) )
     {
       vecset_add(&s2, s->data[i]);
     }

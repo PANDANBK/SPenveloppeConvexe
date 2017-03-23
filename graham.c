@@ -43,10 +43,20 @@ int compa_angle(const struct vec *p1, const struct vec *p2, const void *ctx)
 
   if(a1 == a2)
   {
-    return (int)((p1->x - p2->x)*1000);
+    if(p1->x - p2->x < 0)
+      return -1;
+    else if(p1->x - p2->x > 0)
+      return 1;
+    else
+      return 0;
   }
 
-  return (int)((a1 - a2)*1000);
+  if(a1 - a2 < 0)
+    return -1;
+  else if(a1 - a2 > 0)
+    return 1;
+  else
+    return 0;
 }
 
 void graham_scan(const struct vecset *in, struct vecset *out)
@@ -89,7 +99,7 @@ void graham_scan(const struct vecset *in, struct vecset *out)
     }
 
     // second et top dans la condition afin d'être mis à jour à chaque boucle
-    while(out->size >= 2 && is_left_turn(vecset_second(out), vecset_top(out), &s.data[i]))
+    while(out->size >= 2 && is_right_turn(vecset_second(out), vecset_top(out), &s.data[i]))
     {
       vecset_pop(out);
     }

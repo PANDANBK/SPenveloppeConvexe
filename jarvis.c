@@ -52,7 +52,7 @@ void jarvis_march(const struct vecset *in, struct vecset *out)
 
     for(size_t i = 0; i < in->size; i++)
     {
-      if(!is_left_turn(c, n, &in->data[i]))
+      if(!is_right_turn(c, n, &in->data[i]))
       {
         n = &in->data[i];
       }

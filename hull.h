@@ -38,14 +38,14 @@ double dot(const struct vec *v1, const struct vec *v2);
 double cross(const struct vec *p1, const struct vec *p2, const struct vec *p3);
 
 /**
- * Indique si la suite de points p1 p2 p3 constitue un tournant à gauche
+ * Indique si la suite de points p1 p2 p3 constitue un tournant à droite ou tout droit
  *
  * @param   const struct vec    *p1   Premier point
  * @param   const struct vec    *p2   Deuxième point
  * @param   const struct vec    *p3   Troisième point
- * @return  bool                      Vrai si tournant à gauche
+ * @return  bool                      Vrai si tournant à droite ou tout droit
  */
-bool is_left_turn(const struct vec *p1, const struct vec *p2, const struct vec *p3);
+bool is_right_turn(const struct vec *p1, const struct vec *p2, const struct vec *p3);
 
 /**
  * Ensemble de points
